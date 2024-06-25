@@ -1,0 +1,164 @@
+h1 {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1#colorlib-logo {
+    font-weight: 600 !important;
+}
+
+
+.cardProject {
+    background-color: #fff;
+    box-shadow: 0 0 10px #0000001a;
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 2rem
+}
+
+.cardProject img {
+    width: 100%;
+    border-radius: 2rem;
+    box-shadow: 0 0 10px #0000001a;
+    height: 100%;
+    max-width: 450px;
+    max-height: 350px;
+    object-fit: cover
+}
+
+.cardProject__information {
+    height: 100%
+}
+
+.cardProject__information p {
+    color: var(--text-color)
+}
+
+.cardProject_skills {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: 2rem 0
+}
+
+.cardSkill {
+    padding: .5rem .8rem;
+    margin-bottom: .8rem;
+    box-shadow: 0 0 10px #0000001a
+}
+
+.cardSkill span {
+    font-size: 500;
+    font-weight: 500
+}
+
+.cardProject_links {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: 2rem
+}
+
+.cardLink a {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    text-decoration: none;
+    gap: .5rem;
+    transition: .3s
+}
+
+.cardLink a:hover {
+    color: var(--text-secondary-color)
+}
+
+@media screen and (min-width: 900px) {
+    .cardProject {
+        display: flex;
+        flex-flow: row nowrap;
+        text-align: left;
+        gap: 2rem
+    }
+
+    .cardProject--reverse {
+        flex-flow: row-reverse nowrap
+    }
+}
+
+.projects {
+    padding: 8rem 2rem;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center
+}
+
+.projects__container {
+    max-width: var(--size-container);
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem
+}
+
+.projects__cards {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5rem;
+    width: 100%
+}
+
+.project__components {
+    padding-top: 5rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    gap: 1rem
+}
+
+.componentProject {
+    max-width: 20rem;
+    background-color: #fff;
+    border-radius: 2rem;
+    overflow: hidden;
+    padding: 1rem;
+    box-shadow: 0 0 10px #0000001a
+}
+
+.componentProject img {
+    width: 100%;
+    border-radius: 1rem;
+    object-fit: cover
+}
+
+.componentProject p {
+    color: var(--text-color)
+}
+
+.componentProject p a:first-child {
+    margin-right: .5rem
+}
+
+.componentProject p a {
+    display: inline-block;
+    padding: 1rem;
+    border-radius: .5rem;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: #000;
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease
+}
+
+.componentProject p a:hover {
+    transform: scale(1.1);
+    color: #fff;
+    background-color: var(--secondary-color)
+}
