@@ -7,6 +7,75 @@ h1#colorlib-logo {
 }
 
 
+.scroll-down-link {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%)
+}
+
+.scroll-down {
+    height: 50px;
+    width: 30px;
+    border: 2px solid #000;
+    border-radius: 50px;
+    cursor: pointer
+}
+
+.scroll-down::before,
+.scroll-down::after {
+    height: 10px;
+    width: 10px;
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    border: 2px solid #237a57;
+    transform: translate(-50%, -100%) rotate(45deg);
+    border-top: none;
+    border-left: none;
+    animation: scroll-down 1s ease-in-out infinite
+}
+
+.scroll-down::after {
+    top: 30%;
+    animation-delay: .3s
+}
+
+@keyframes hidden {
+    0% {
+        opacity: 0
+    }
+
+    50% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 1
+    }
+}
+
+@keyframes scroll-down {
+    0% {
+        opacity: 0
+    }
+
+    30% {
+        opacity: 1
+    }
+
+    60% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0;
+        top: 90%
+    }
+}
+
+
 .cardProject {
     background-color: #fff;
     box-shadow: 0 0 10px #0000001a;
@@ -161,4 +230,8 @@ h1#colorlib-logo {
     transform: scale(1.1);
     color: #fff;
     background-color: var(--secondary-color)
+}
+
+article.cardProject {
+    margin: 30px auto;
 }
