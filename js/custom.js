@@ -37,3 +37,90 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Contact Form
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Show loading spinner and disable the button
+    document.getElementById('buttonSpinner').classList.remove('hidden');
+    document.getElementById('buttonText').classList.add('hidden');
+    document.getElementById('submitButton').disabled = true;
+
+    // Form data
+    const formData = new FormData(this);
+
+    // AJAX request
+    fetch('https://formspree.io/f/mvgpooel', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        // Handle response
+        document.getElementById('buttonSpinner').classList.add('hidden');
+        document.getElementById('buttonText').classList.remove('hidden');
+        document.getElementById('submitButton').disabled = false;
+
+        let messageBox = document.getElementById('form-messages');
+        messageBox.classList.remove('hidden');
+        if (response.ok) {
+            messageBox.classList.add('bg-green-100', 'text-green-700');
+            messageBox.innerHTML = 'Your message has been sent successfully!';
+            document.getElementById('contactForm').reset();
+        } else {
+            response.json().then(data => {
+                messageBox.classList.add('bg-red-100', 'text-red-700');
+                if (data.errors) {
+                    messageBox.innerHTML = data.errors.map(error => error.message).join('<br>');
+                } else {
+                    messageBox.innerHTML = 'Oops! Something went wrong. Please try again later.';
+                }
+            });
+        }
+    })
+    .catch(error => {
+        // Handle error
+        document.getElementById('buttonSpinner').classList.add('hidden');
+        document.getElementById('buttonText').classList.remove('hidden');
+        document.getElementById('submitButton').disabled = false;
+
+        let messageBox = document.getElementById('form-messages');
+        messageBox.classList.remove('hidden');
+        messageBox.classList.add('bg-red-100', 'text-red-700');
+        messageBox.innerHTML = 'Oops! There was a problem submitting your form. Please try again.';
+    });
+});
+
+// Typewriter effect
+function typeWriter(text, element) {
+    let index = 0;
+    function type() {
+        if (index < text.length) {
+            element.value += text.charAt(index);
+            index++;
+            setTimeout(type, 50);
+        }
+    }
+    setTimeout(type, 1000); // 1 second delay before starting
+}
+
+// Intersection Observer to trigger typewriter effect when textarea is visible
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const textarea = entry.target;
+            const text = textarea.placeholder;
+            textarea.placeholder = ''; // Clear the placeholder
+            typeWriter(text, textarea); // Start typing animation
+            observer.unobserve(textarea); // Stop observing once the animation starts
+        }
+    });
+}, { threshold: 0.5 }); // Trigger when at least 50% is visible
+
+// Start observing the textarea
+const textarea = document.getElementById('message');
+observer.observe(textarea);

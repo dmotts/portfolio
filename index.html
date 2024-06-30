@@ -1054,7 +1054,7 @@
 								<div class="row">
 									<div class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box"
 										data-animate-effect="fadeInRight">
-										<form action="https://formspree.io/f/mvgpooel" method="POST">
+										<form if="ntactForm">
             <div class="form-group mb-4">
                 <input type="text" name="name" class="form-control border rounded w-full py-2 px-3" placeholder="Name" required>
             </div>
@@ -1068,8 +1068,12 @@
                 <textarea name="message" id="message" cols="30" rows="7" class="form-control border rounded w-full py-2 px-3" placeholder="Have a great idea or do you need help overcoming challenges in your business? Send me a message and let's chat!" required></textarea>
             </div>
             <div class="form-group flex justify-end">
-                <input type="submit" class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded" value="Send Message">
+				<button type="submit" id="submitButton" class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded flex items-center justify-center">
+					<span id="buttonText">Send Message</span>
+					<div id="buttonSpinner" class="spinner hidden ml-2"></div>
+				</button>
             </div>
+											<div id="form-messages" class="hidden mb-4 p-2 rounded"></div>
         </form>
 									</div>
 
