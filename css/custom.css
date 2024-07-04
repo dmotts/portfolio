@@ -282,7 +282,8 @@ article.cardProject {
     margin: 30px auto;
 }
 
- @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
+
     .colorlib-experience,
     .colorlib-skills,
     .colorlib-education,
@@ -291,54 +292,76 @@ article.cardProject {
     .colorlib-about,
     .colorlib-services,
     .colorlib-contact {
-      padding-top: 5em;
-      padding-bottom: 5em; } }
+        padding-top: 5em;
+        padding-bottom: 5em;
+    }
+}
 
 /* Additional custom styles */
 .hidden {
     display: none !important;
 }
+
 .fadeIn {
     animation: fadeIn 0.5s ease-in forwards;
 }
+
 .fadeOut {
     animation: fadeOut 0.5s ease-out forwards;
 }
+
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
     }
 }
+
 @keyframes fadeOut {
     from {
         opacity: 1;
         transform: scale(1);
     }
+
     to {
         opacity: 0;
         transform: scale(0.95);
     }
 }
 
+.colorlib-skills {
+    padding-bottom: 0;
+}
+
+.colorlib-work {
+    /* padding-top: 3em; */
+}
 
 /* CONTACT FORM */
 .hidden {
-            display: none;
-        }
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    display: none;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
