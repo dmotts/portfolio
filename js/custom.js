@@ -95,12 +95,12 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     });
 });
 
-// Typewriter effect
+// Typewriter effect for placeholder text
 function typeWriter(text, element) {
     let index = 0;
     function type() {
         if (index < text.length) {
-            element.value += text.charAt(index);
+            element.placeholder += text.charAt(index);
             index++;
             setTimeout(type, 50);
         }
@@ -113,7 +113,7 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const textarea = entry.target;
-            const text = textarea.placeholder;
+            const text = textarea.dataset.placeholder; // Retrieve text from data-placeholder attribute
             textarea.placeholder = ''; // Clear the placeholder
             typeWriter(text, textarea); // Start typing animation
             observer.unobserve(textarea); // Stop observing once the animation starts
@@ -123,4 +123,6 @@ const observer = new IntersectionObserver((entries) => {
 
 // Start observing the textarea
 const textarea = document.getElementById('message');
+// Use a data attribute to store the placeholder text initially
+textarea.dataset.placeholder = textarea.placeholder;
 observer.observe(textarea);
