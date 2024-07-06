@@ -196,13 +196,13 @@ h1#colorlib-logo {
 @media screen and (min-width: 900px) {
     .cardProject {
         display: flex;
-        flex-flow: row nowrap;
-        text-align: left;
-        gap: 2rem
+        /* flex-flow: row nowrap; */
+        /* text-align: left; */
+        /* gap: 2rem */
     }
 
     .cardProject--reverse {
-        flex-flow: row-reverse nowrap
+        /* flex-flow: row-reverse nowrap */
     }
 }
 
@@ -282,6 +282,17 @@ article.cardProject {
     margin: 30px auto;
 }
 
+.colorlib-experience,
+.colorlib-skills,
+.colorlib-education,
+.colorlib-blog,
+.colorlib-work,
+.colorlib-about,
+.colorlib-services,
+.colorlib-contact {
+    padding-bottom: 3em;
+}
+
 @media screen and (max-width: 768px) {
 
     .colorlib-experience,
@@ -293,7 +304,7 @@ article.cardProject {
     .colorlib-services,
     .colorlib-contact {
         padding-top: 5em;
-        padding-bottom: 5em;
+        padding-bottom: 0em;
     }
 }
 
@@ -332,10 +343,6 @@ article.cardProject {
         opacity: 0;
         transform: scale(0.95);
     }
-}
-
-.colorlib-skills {
-    padding-bottom: 0;
 }
 
 .colorlib-work {
