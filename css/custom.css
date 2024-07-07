@@ -121,6 +121,15 @@ h1#colorlib-logo {
     }
 }
 
+/* PROJECTS */
+
+.work-menu span a.active {
+ 
+  text-decoration: none; /* Remove the default underline */
+  border-bottom: 1px solid #2c98f0; /* Adjust the border thickness and color */
+  padding-bottom: 2px; /* Adjust the space between text and border */
+
+}
 
 .cardProject {
     background-color: #fff;
@@ -380,15 +389,18 @@ article.cardProject {
 .textarea-container {
     display: flex;
     justify-content: center;
-    align-items: center;   
+    align-items: center;
 }
+
 .textarea {
-    width: 100%; /* Adjust the width as needed */
-   /* max-width: 600px;  Optional: limit the maximum width */
+    width: 100%;
+    /* Adjust the width as needed */
+    /* max-width: 600px;  Optional: limit the maximum width */
     padding: 10px;
     box-sizing: border-box;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
-    resize: none; /* Prevent manual resizing if desired */
+    resize: none;
+    /* Prevent manual resizing if desired */
 }
