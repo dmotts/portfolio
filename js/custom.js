@@ -3,7 +3,38 @@
 document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectItems = document.querySelectorAll('#project-list .col-md-6');
+    const loadMoreButton = document.getElementById('load-more');
+    const spinner = document.getElementById('spinner');
 
+    let itemsPerLoad = 2; // Number of items to load per click
+    let visibleItemsCount = itemsPerLoad; // Initial number of visible items
+
+    // Show the initial set of items
+    function showInitialItems() {
+        let visibleCount = 0;
+        projectItems.forEach((item, index) => {
+            if (index < itemsPerLoad) {
+                item.style.display = 'block';
+                visibleCount++;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+        updateLoadMoreButton(visibleCount);
+    }
+
+    // Update the visibility of the Load More button
+    function updateLoadMoreButton(visibleCount) {
+        const filter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+        const filteredItems = Array.from(projectItems).filter(item => filter === 'all' || item.getAttribute('data-category') === filter);
+        if (visibleCount < filteredItems.length) {
+            loadMoreButton.style.display = 'inline-block';
+        } else {
+            loadMoreButton.style.display = 'none';
+        }
+    }
+
+    // Handle the filter button click event
     filterButtons.forEach(button => {
         button.addEventListener('click', event => {
             event.preventDefault();
@@ -15,27 +46,64 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add 'active' class to the clicked button
             button.classList.add('active');
 
-            // Filter items
+            // Filter and reset items
+            let visibleCount = 0;
             projectItems.forEach(item => {
                 const itemCategory = item.getAttribute('data-category');
 
                 if (filter === 'all' || itemCategory === filter) {
-                    if (item.classList.contains('hidden')) {
-                        item.classList.remove('hidden', 'fadeOut');
+                    if (visibleCount < itemsPerLoad) {
+                        item.style.display = 'block';
                         item.classList.add('fadeIn');
+                        item.classList.remove('fadeOut');
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
                     }
                 } else {
-                    if (!item.classList.contains('hidden')) {
-                        item.classList.remove('fadeIn');
-                        item.classList.add('fadeOut');
-                        setTimeout(() => {
-                            item.classList.add('hidden');
-                        }, 500); // Match the duration of the fadeOut animation
-                    }
+                    item.style.display = 'none';
                 }
             });
+
+            // Reset visibleItemsCount and update Load More button
+            visibleItemsCount = itemsPerLoad;
+            updateLoadMoreButton(visibleCount);
         });
     });
+
+    // Handle the Load More button click event
+    loadMoreButton.addEventListener('click', () => {
+        const filter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+        const filteredItems = Array.from(projectItems).filter(item => filter === 'all' || item.getAttribute('data-category') === filter);
+
+        // Check if there are more items to load
+        if (visibleItemsCount >= filteredItems.length) {
+            loadMoreButton.style.display = 'none'; // No more items to load
+            return;
+        }
+
+        spinner.style.display = 'block'; // Show spinner
+        loadMoreButton.style.display = 'none'; // Hide Load More button
+
+        setTimeout(() => {
+            spinner.style.display = 'none'; // Hide spinner after loading
+            let visibleCount = 0;
+
+            filteredItems.forEach((item, index) => {
+                if (index < visibleItemsCount + itemsPerLoad && index >= visibleItemsCount) {
+                    item.style.display = 'block';
+                    item.classList.add('fadeIn');
+                    visibleCount++;
+                }
+            });
+
+            visibleItemsCount += itemsPerLoad;
+            updateLoadMoreButton(visibleCount);
+        }, 500); // Simulate loading delay
+    });
+
+    // Initialize the view with the initial set of items
+    showInitialItems();
 });
 
 // Contact Form
