@@ -95,6 +95,35 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     });
 });
 
+// Function to insert spaces to adjust line breaks
+function adjustPlaceholderText(text, element) {
+    // Calculate the number of characters that fit in one line
+    const textareaWidth = element.clientWidth;
+    const fontSize = parseFloat(window.getComputedStyle(element).fontSize);
+    const charWidth = fontSize * 0.55; // Refined approximate character width
+    const charsPerLine = Math.floor(textareaWidth / charWidth);
+
+    // Split the text into lines based on double newline as paragraph separator
+    const lines = text.split('\n\n');
+    const adjustedText = lines.map(line => {
+        // Handle word wrapping more accurately
+        let lineWithSpaces = '';
+        let lineLength = 0;
+        const words = line.split(' ');
+        words.forEach(word => {
+            if (lineLength + word.length >= charsPerLine) {
+                lineWithSpaces += '\n';
+                lineLength = 0;
+            }
+            lineWithSpaces += word + ' ';
+            lineLength += word.length + 1;
+        });
+        return lineWithSpaces.trim();
+    }).join('\n\n');
+
+    return adjustedText;
+}
+
 // Typewriter effect for placeholder text
 function typeWriter(text, element) {
     let index = 0;
@@ -113,9 +142,10 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const textarea = entry.target;
-            const text = textarea.dataset.placeholder; // Retrieve text from data-placeholder attribute
+            const originalText = "Do you have a great idea on your mind or need help overcoming challenges in your business?\n\nSend me a message and let's chat!";
+            const adjustedText = adjustPlaceholderText(originalText, textarea);
             textarea.placeholder = ''; // Clear the placeholder
-            typeWriter(text, textarea); // Start typing animation
+            typeWriter(adjustedText, textarea); // Start typing animation
             observer.unobserve(textarea); // Stop observing once the animation starts
         }
     });
@@ -123,6 +153,4 @@ const observer = new IntersectionObserver((entries) => {
 
 // Start observing the textarea
 const textarea = document.getElementById('message');
-// Use a data attribute to store the placeholder text initially
-textarea.dataset.placeholder = textarea.placeholder;
 observer.observe(textarea);

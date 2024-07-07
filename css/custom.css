@@ -372,3 +372,23 @@ article.cardProject {
         transform: rotate(360deg);
     }
 }
+
+#message {
+    height: 170px;
+}
+
+.textarea-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+.textarea {
+    width: 100%; /* Adjust the width as needed */
+   /* max-width: 600px;  Optional: limit the maximum width */
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    resize: none; /* Prevent manual resizing if desired */
+}
