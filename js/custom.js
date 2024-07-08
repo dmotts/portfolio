@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadMoreButton = document.getElementById('load-more');
     const spinner = document.getElementById('spinner');
 
-    let itemsPerLoad = 2; // Number of items to load per click
+    let itemsPerLoad = 3; // Number of items to load per click
     let visibleItemsCount = itemsPerLoad; // Initial number of visible items
 
     // Show the initial set of items
