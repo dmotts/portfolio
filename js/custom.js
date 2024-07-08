@@ -127,40 +127,40 @@ document.getElementById('contactForm').addEventListener('submit', function(event
             'Accept': 'application/json'
         }
     })
-    .then(response => {
-        // Handle response
-        document.getElementById('buttonSpinner').classList.add('hidden');
-        document.getElementById('buttonText').classList.remove('hidden');
-        document.getElementById('submitButton').disabled = false;
+        .then(response => {
+            // Handle response
+            document.getElementById('buttonSpinner').classList.add('hidden');
+            document.getElementById('buttonText').classList.remove('hidden');
+            document.getElementById('submitButton').disabled = false;
 
-        let messageBox = document.getElementById('form-messages');
-        messageBox.classList.remove('hidden');
-        if (response.ok) {
-            messageBox.classList.add('bg-green-100', 'text-green-700');
-            messageBox.innerHTML = 'Your message has been sent successfully!';
-            document.getElementById('contactForm').reset();
-        } else {
-            response.json().then(data => {
-                messageBox.classList.add('bg-red-100', 'text-red-700');
-                if (data.errors) {
-                    messageBox.innerHTML = data.errors.map(error => error.message).join('<br>');
-                } else {
-                    messageBox.innerHTML = 'Oops! Something went wrong. Please try again later.';
-                }
-            });
-        }
-    })
-    .catch(error => {
-        // Handle error
-        document.getElementById('buttonSpinner').classList.add('hidden');
-        document.getElementById('buttonText').classList.remove('hidden');
-        document.getElementById('submitButton').disabled = false;
+            let messageBox = document.getElementById('form-messages');
+            messageBox.classList.remove('hidden');
+            if (response.ok) {
+                messageBox.classList.add('bg-green-100', 'text-green-700');
+                messageBox.innerHTML = 'Your message has been sent successfully!';
+                document.getElementById('contactForm').reset();
+            } else {
+                response.json().then(data => {
+                    messageBox.classList.add('bg-red-100', 'text-red-700');
+                    if (data.errors) {
+                        messageBox.innerHTML = data.errors.map(error => error.message).join('<br>');
+                    } else {
+                        messageBox.innerHTML = 'Oops! Something went wrong. Please try again later.';
+                    }
+                });
+            }
+        })
+        .catch(error => {
+            // Handle error
+            document.getElementById('buttonSpinner').classList.add('hidden');
+            document.getElementById('buttonText').classList.remove('hidden');
+            document.getElementById('submitButton').disabled = false;
 
-        let messageBox = document.getElementById('form-messages');
-        messageBox.classList.remove('hidden');
-        messageBox.classList.add('bg-red-100', 'text-red-700');
-        messageBox.innerHTML = 'Oops! There was a problem submitting your form. Please try again.';
-    });
+            let messageBox = document.getElementById('form-messages');
+            messageBox.classList.remove('hidden');
+            messageBox.classList.add('bg-red-100', 'text-red-700');
+            messageBox.innerHTML = 'Oops! There was a problem submitting your form. Please try again.';
+        });
 });
 
 // Function to insert spaces to adjust line breaks
