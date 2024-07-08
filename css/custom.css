@@ -33,7 +33,18 @@ img.w-\[40px\].lg\:w-\[50px\].h-\[40px\].lg\:h-\[50px\].m-0 {
 /* MISC - END */
 
 /* GENERAL */
+a {
+color: #2c98f0;
+}
 
+#colorlib-aside {
+  background: rgb(205,201,234);
+  background: linear-gradient(180deg, rgb(229, 226, 247) 0%, rgb(241, 240, 253) 70%);
+}
+
+.author-img {
+  box-shadow: -5px 7px 19px 1px #0a0a0624;
+}
 h1 {
     font-family: 'Poppins', sa ns-serif;
 }
@@ -123,11 +134,25 @@ h1#colorlib-logo {
     }
 }
 
+/* GENERAL  - END */
+
+/* SIDE MENU */
+
+#colorlib-aside {
+  background: rgb(205,201,234);
+  background: linear-gradient(180deg, rgb(229, 226, 247) 0%, rgb(241, 240, 253) 70%);
+}
+
+.author-img {
+  box-shadow: -5px 7px 19px 1px #0a0a0624;
+}
+
+/* SIDE MENU  - END */
+
 /* PROJECTS */
 
-/* Filter animations */
+/* -- Filter animations -- */
 
-/* Custom styles */
 .hidden {
     display: none !important;
 }
