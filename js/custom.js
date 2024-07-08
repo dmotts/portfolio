@@ -127,42 +127,38 @@ document.getElementById('contactForm').addEventListener('submit', function(event
             'Accept': 'application/json'
         }
     })
-        .then(response => {
-            // Handle response
-            document.getElementById('buttonSpinner').classList.add('hidden');
-            document.getElementById('buttonText').classList.remove('hidden');
-            document.getElementById('submitButton').disabled = false;
+    .then(response => {
+        // Hide the loading spinner and enable the button
+        document.getElementById('buttonSpinner').classList.add('hidden');
+        document.getElementById('buttonText').classList.remove('hidden');
+        document.getElementById('submitButton').disabled = false;
 
-            let messageBox = document.getElementById('form-messages');
-            messageBox.classList.remove('hidden');
-            if (response.ok) {
-                messageBox.classList.add('bg-green-100', 'text-green-700');
-                messageBox.innerHTML = 'Your message has been sent successfully!';
-                document.getElementById('contactForm').reset();
-            } else {
-                response.json().then(data => {
-                    messageBox.classList.add('bg-red-100', 'text-red-700');
-                    if (data.errors) {
-                        messageBox.innerHTML = data.errors.map(error => error.message).join('<br>');
-                    } else {
-                        messageBox.innerHTML = 'Oops! Something went wrong. Please try again later.';
-                    }
-                });
-            }
-        })
-        .catch(error => {
-            // Handle error
-            document.getElementById('buttonSpinner').classList.add('hidden');
-            document.getElementById('buttonText').classList.remove('hidden');
-            document.getElementById('submitButton').disabled = false;
+        // Handle the placeholder message display
+        let messageTextarea = document.getElementById('message');
+        if (response.ok) {
+            messageTextarea.placeholder = 'Your message has been sent successfully!';
+            document.getElementById('contactForm').reset();
+        } else {
+            response.json().then(data => {
+                if (data.errors) {
+                    messageTextarea.placeholder = data.errors.map(error => error.message).join('\n');
+                } else {
+                    messageTextarea.placeholder = 'Oops! Something went wrong. Please try again later.';
+                }
+            });
+        }
+    })
+    .catch(error => {
+        // Hide the loading spinner and enable the button
+        document.getElementById('buttonSpinner').classList.add('hidden');
+        document.getElementById('buttonText').classList.remove('hidden');
+        document.getElementById('submitButton').disabled = false;
 
-            let messageBox = document.getElementById('form-messages');
-            messageBox.classList.remove('hidden');
-            messageBox.classList.add('bg-red-100', 'text-red-700');
-            messageBox.innerHTML = 'Oops! There was a problem submitting your form. Please try again.';
-        });
+        // Display error message in the placeholder
+        let messageTextarea = document.getElementById('message');
+        messageTextarea.placeholder = 'Oops! There was a problem submitting your form. Please try again.';
+    });
 });
-
 // Function to insert spaces to adjust line breaks
 function adjustPlaceholderText(text, element) {
     // Calculate the number of characters that fit in one line
