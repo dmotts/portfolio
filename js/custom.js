@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectItems = document.querySelectorAll('#project-list .col-md-6');
+    const projectItems = document.querySelectorAll('#project-list .card-project-container');
     const loadMoreButton = document.getElementById('load-more');
     const spinner = document.getElementById('spinner');
 
