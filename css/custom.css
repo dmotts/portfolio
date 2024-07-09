@@ -137,7 +137,7 @@ h1#colorlib-logo {
 /* GENERAL  - END */
 
 /* SIDE MENU */
-
+body.offcanvas #colorlib-aside,
 #colorlib-aside {
   background: rgb(205,201,234);
   background: linear-gradient(180deg, rgb(229, 226, 247) 0%, rgb(241, 240, 253) 70%);
