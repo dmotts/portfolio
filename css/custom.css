@@ -149,6 +149,26 @@ body.offcanvas #colorlib-aside,
 
 /* SIDE MENU  - END */
 
+/* ABOUT */
+@media screen and (max-width: 768px) {
+    .colorlib-heading {
+       margin-bottom: 2em;
+    }
+}
+
+.author-img {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+}
+/* ABOUT - END */
+
+
 /* PROJECTS */
 
 /* -- Filter animations -- */
