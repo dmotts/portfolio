@@ -152,7 +152,7 @@ body.offcanvas #colorlib-aside,
 /* ABOUT */
 @media screen and (max-width: 768px) {
     .colorlib-heading {
-       margin-bottom: 2em;
+       margin-bottom: 1.7em;
     }
 }
 
