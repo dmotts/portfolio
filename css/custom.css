@@ -164,7 +164,7 @@ body.offcanvas #colorlib-aside,
 }
 
 /* SIDE MENU  - END */
-
+c
 /* ABOUT */
 
 .colorlib-about p {
@@ -474,6 +474,11 @@ article.cardProject {
 
 
 /* CONTACT FORM */
+.form-control {
+    font-size: 16px;
+    font-weight: 300;
+}
+
 .hidden {
     display: none;
 }
