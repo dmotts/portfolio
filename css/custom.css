@@ -15,8 +15,21 @@
     align-items: center;
 }
 
+.w70 {
+    width: 70px !important;
+}
+
+.w90 {
+    width: 90px !important;
+}
+
+
+.w100 {
+    width: 100px !important;
+}
+
 /* MISC */
-img.w-\[40px\].lg\:w-\[50px\].h-\[40px\].lg\:h-\[50px\].m-0 {
+.colorlib-skills img {
     width: 40px;
 }
 
@@ -34,17 +47,18 @@ img.w-\[40px\].lg\:w-\[50px\].h-\[40px\].lg\:h-\[50px\].m-0 {
 
 /* GENERAL */
 a {
-color: #2c98f0;
+    color: #2c98f0;
 }
 
 #colorlib-aside {
-  background: rgb(205,201,234);
-  background: linear-gradient(180deg, rgb(229, 226, 247) 0%, rgb(241, 240, 253) 70%);
+    background: rgb(205, 201, 234);
+    background: linear-gradient(180deg, rgb(229, 226, 247) 0%, rgb(241, 240, 253) 70%);
 }
 
 .author-img {
-  box-shadow: -5px 7px 19px 1px #0a0a0624;
+    box-shadow: -5px 7px 19px 1px #0a0a0624;
 }
+
 h1 {
     font-family: 'Poppins', sa ns-serif;
 }
@@ -139,12 +153,12 @@ h1#colorlib-logo {
 /* SIDE MENU */
 body.offcanvas #colorlib-aside,
 #colorlib-aside {
-  background: rgb(205,201,234);
-  background: linear-gradient(180deg, rgb(229, 226, 247) 0%, rgb(241, 240, 253) 70%);
+    background: rgb(205, 201, 234);
+    background: linear-gradient(180deg, rgb(229, 226, 247) 0%, rgb(241, 240, 253) 70%);
 }
 
 .author-img {
-  box-shadow: -5px 7px 19px 1px #0a0a0624;
+    box-shadow: -5px 7px 19px 1px #0a0a0624;
 }
 
 /* SIDE MENU  - END */
@@ -152,7 +166,7 @@ body.offcanvas #colorlib-aside,
 /* ABOUT */
 @media screen and (max-width: 768px) {
     .colorlib-heading {
-       margin-bottom: 1.7em;
+        margin-bottom: 1.7em;
     }
 }
 
@@ -166,6 +180,7 @@ body.offcanvas #colorlib-aside,
     -ms-border-radius: 50%;
     border-radius: 50%;
 }
+
 /* ABOUT - END */
 
 
@@ -176,32 +191,39 @@ body.offcanvas #colorlib-aside,
 .hidden {
     display: none !important;
 }
+
 .fadeIn {
     animation: fadeIn 0.5s ease-in forwards;
 }
+
 .fadeOut {
     animation: fadeOut 0.5s ease-out forwards;
 }
+
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
     }
 }
+
 @keyframes fadeOut {
     from {
         opacity: 1;
         transform: scale(1);
     }
+
     to {
         opacity: 0;
         transform: scale(0.95);
     }
 }
+
 /* Spinner */
 .spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
@@ -211,25 +233,31 @@ body.offcanvas #colorlib-aside,
     width: 24px;
     height: 24px;
     animation: spin 1s linear infinite;
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
 }
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
-}    
+}
 
 
 /* Filter animations - END */
 
 .work-menu span a.active {
- 
-  text-decoration: none; /* Remove the default underline */
-  border-bottom: 1px solid #2c98f0; /* Adjust the border thickness and color */
-  padding-bottom: 2px; /* Adjust the space between text and border */
+
+    text-decoration: none;
+    /* Remove the default underline */
+    border-bottom: 1px solid #2c98f0;
+    /* Adjust the border thickness and color */
+    padding-bottom: 2px;
+    /* Adjust the space between text and border */
 
 }
 
