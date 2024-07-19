@@ -166,6 +166,11 @@ body.offcanvas #colorlib-aside,
 /* SIDE MENU  - END */
 
 /* ABOUT */
+
+.colorlib-about p {
+    color: rgba(0, 0, 0, 0.7)
+}
+
 @media screen and (max-width: 768px) {
     .colorlib-heading {
         margin-bottom: 1.7em;
@@ -189,15 +194,15 @@ body.offcanvas #colorlib-aside,
 .colorlib-skills div.flex {
     flex-direction: column;
     justify-content: space-between;
-  margin-right: 12px;
+    margin-right: 12px;
 }
 
 .colorlib-skills p {
-  text-align: center
+    text-align: center
 }
 
 .colorlib-skills .flex img {
-  align-self: center
+    align-self: center
 }
 
 /* SKILLS - END */
