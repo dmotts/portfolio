@@ -38,11 +38,6 @@
     justify-content: flex-start;
 }
 
-.flex.flex-col.justify-center.items-center {
-    flex-direction: column;
-    margin: auto 12px;
-}
-
 /* MISC - END */
 
 /* GENERAL */
@@ -183,6 +178,22 @@ body.offcanvas #colorlib-aside,
 
 /* ABOUT - END */
 
+/* SKILLS */
+.colorlib-skills div.flex {
+    flex-direction: column;
+    justify-content: space-between;
+  margin-right: 12px;
+}
+
+.colorlib-skills p {
+  text-align: center
+}
+
+.colorlib-skills .flex img {
+  align-self: center
+}
+
+/* SKILLS - END */
 
 /* PROJECTS */
 
