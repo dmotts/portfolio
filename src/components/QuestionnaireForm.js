@@ -69,7 +69,7 @@ export default {
         this.apiError = true;
         this.apiErrorMsg = error.message;
         // Fallback to Formspree if API fails
-        await fetch('https://formspree.io/YOUR_FORMSPREE_EMAIL', {
+        await fetch('https://formspree.io/f/mnnapkre', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
