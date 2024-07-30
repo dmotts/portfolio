@@ -53,7 +53,9 @@ export default {
           })
         });
 
-        console.log(`Response: ${JSON.stringify(response)}`);
+        console.log(`Response Object: ${JSON.stringify(response)}`);
+
+        console.log(`Response: ${response}`);
 
         if (!response.ok) {
           throw new Error('Failed to connect to the API');
