@@ -6,7 +6,7 @@ export default {
     },
     template: `
     <div>
-      <h1>Business A.I. Insights Questionnaire</h1>
+      <h1>AI Business Insights Quiz</h1>
       <questionnaire-form />
     </div>
   `,

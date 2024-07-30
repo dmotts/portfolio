@@ -42,7 +42,7 @@ export default {
   methods: {
     async submitForm() {
       try {
-        const response = await fetch('https://<YOUR_RENDER_API_URL>/generate-report', {
+        const response = await fetch('https://quiz-app-nxsw.onrender.com/generate-report', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -53,6 +53,8 @@ export default {
           })
         });
 
+        console.log(`Response: ${JSON.stringify(response)}`);
+
         if (!response.ok) {
           throw new Error('Failed to connect to the API');
         }
@@ -61,7 +63,7 @@ export default {
         this.formSubmitted = true;
         const a = document.createElement('a');
         a.href = data.downloadUrl;
-        a.download = 'Business_AI_Insights_Report.pdf';
+        a.download = 'AI_Business_Insights_Report.pdf';
         a.click();
       } catch (error) {
         this.apiError = true;
@@ -73,7 +75,7 @@ export default {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            subject: 'A.I. API is down - Business A.I. Insights Report',
+            subject: 'A.I. API is down - AI Business Insights Report',
             answers: this.questions.map(q => q.answer),
             additionalInfo: this.additionalInfo,
           })
