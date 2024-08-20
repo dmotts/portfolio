@@ -52,6 +52,27 @@ a {
     color: #2c98f0;
 }
 
+div#colorlib-main {
+    background: #f5f7fa;
+}
+
+.container {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x)*.5);
+    padding-left: calc(var(--bs-gutter-x)*.5);
+    margin-right: auto;
+    margin-left: auto;
+}
+@media screen and (max-width: 768px) {
+    div#colorlib-main {
+        margin-top: 90px;
+        position: relative;
+        padding-top: calc(0px + 1rem);}
+
+    }
+}
 #colorlib-aside {
     background: rgb(205, 201, 234);
     background: linear-gradient(180deg, rgb(229, 226, 247) 0%, rgb(241, 240, 253) 70%);
@@ -164,11 +185,21 @@ body.offcanvas #colorlib-aside,
 }
 
 /* SIDE MENU  - END */
-c
+
 /* ABOUT */
+.colorlib-about .author-img {    
+    max-width: 160px;
+    position: absolute;
+    left: 50%;
+    margin-left: -80px;
+    top: -160px;
+    border: 8px solid #f5f7fa;
+    overflow: clip;
+    box-shadow: none;
+    }
 
 .colorlib-about p {
-    color: rgba(0, 0, 0, 0.7)
+    color: rgba(0, 0, 0, 0.7)\
 }
 
 @media screen and (max-width: 768px) {
