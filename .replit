@@ -1,6 +1,7 @@
 entrypoint = "index.html"
 
 hidden=[".config"]
+modules = ["web", "nodejs-20", "python-3.12"]
 
 # hosting is currently hardcoded for this language
 # [hosting]
@@ -8,7 +9,7 @@ hidden=[".config"]
 # directory= "/"
 
 [nix]
-channel = "stable-22_11"
+channel = "stable-24_05"
 
 [languages.html]
 pattern = "**/*.html"
