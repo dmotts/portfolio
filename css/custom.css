@@ -690,3 +690,52 @@ article.cardProject {
         align-items: center;
     }
 }
+
+/* Custom Tooltip Styles */
+[data-tooltip] {
+  position: relative;
+  cursor: pointer;
+}
+
+[data-tooltip]::before,
+[data-tooltip]::after {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  z-index: 10;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  background-color: #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  bottom: 125%; /* Position the tooltip above the icon */
+  transform: translateX(-50%) translateY(-10px);
+}
+
+[data-tooltip]::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #333;
+  bottom: 125%;
+  margin-bottom: -6px; /* Position the arrow correctly */
+  transform: translateX(-50%) translateY(-10px);
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::before,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
