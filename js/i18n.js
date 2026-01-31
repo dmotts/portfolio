@@ -17,9 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const populateLanguageOptions = () => {
     languageOptions.innerHTML = ''; // Clear existing options
     for (const [lang, { name, flag }] of Object.entries(languages)) {
-      const option = document.createElement('div');
+      const option = document.createElement('li');
       option.classList.add('language-option-item');
       option.setAttribute('data-lang', lang);
+      option.setAttribute('role', 'option');
+      option.setAttribute('tabindex', '0');
+      option.setAttribute('aria-selected', 'false');
 
       const img = document.createElement('img');
       img.src = `https://flagcdn.com/${flag}.svg`;
@@ -84,6 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const selectedContent = selectedLanguage.querySelector('.language-option-item');
       selectedContent.innerHTML = `<i class="icon-world" style="vertical-align: middle; margin-right: 0.25em;"></i> ${lang.toUpperCase()}`;
 
+      // Update ARIA attributes
+      selectedLanguage.setAttribute('aria-expanded', 'false');
+      document.querySelectorAll('#language-options [role="option"]').forEach(option => {
+        option.setAttribute('aria-selected', option.getAttribute('data-lang') === lang);
+      });
+
       // Hide options
       languageOptions.style.display = 'none';
     } catch (error) {
@@ -91,9 +100,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const toggleMenu = (show) => {
+    const willShow = show !== undefined ? show : languageOptions.style.display !== 'block';
+    languageOptions.style.display = willShow ? 'block' : 'none';
+    selectedLanguage.setAttribute('aria-expanded', willShow);
+  };
+
   selectedLanguage.addEventListener('click', (event) => {
     event.stopPropagation();
-    languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+    toggleMenu();
+  });
+
+  selectedLanguage.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleMenu();
+    } else if (event.key === 'Escape') {
+      toggleMenu(false);
+    } else if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      toggleMenu(true);
+      languageOptions.querySelector('[role="option"]')?.focus();
+    }
+  });
+
+  languageOptions.addEventListener('keydown', (event) => {
+    const options = Array.from(languageOptions.querySelectorAll('[role="option"]'));
+    const currentIndex = options.indexOf(document.activeElement);
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      const nextIndex = (currentIndex + 1) % options.length;
+      options[nextIndex].focus();
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      const prevIndex = (currentIndex - 1 + options.length) % options.length;
+      options[prevIndex].focus();
+    } else if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      const lang = document.activeElement.getAttribute('data-lang');
+      if (lang) setLanguage(lang);
+    } else if (event.key === 'Escape') {
+      toggleMenu(false);
+      selectedLanguage.focus();
+    }
   });
 
   languageOptions.addEventListener('click', (event) => {
