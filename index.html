@@ -84,15 +84,15 @@
 
 <body>
 	<div id="language-switcher-container">
-		<div id="selected-language">
+		<button id="selected-language" class="language-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
 			<div class="language-option-item">
 				<img loading="lazy" src="https://flagcdn.com/gb.svg" alt="English">
 				<span>English</span>
 			</div>
-		</div>
-		<div id="language-options">
+		</button>
+		<ul id="language-options" role="listbox">
 			<!-- Language options will be populated by i18n.js -->
-		</div>
+		</ul>
 	</div>
 	<div id="loader-wrapper">
 		<div id="loader"></div>
@@ -822,7 +822,7 @@ My mission is to empower entrepreneurs and companies by creating custom applicat
 																<div class="form-group mb-4">
 																	<label for="name" class="sr-only" data-i18n="contact.name">Name</label>
 																	<input type="text" id="name" name="name"
-																		class="form-control border rounded w-full py-2 px,,9-3"
+																		class="form-control border rounded w-full py-2 px-3"
 																		placeholder="Name" required aria-required="true" data-i18n="contact.name" placeholder-i18n="contact.name">
 																</div>
 																<div class="form-group mb-4">

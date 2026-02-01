@@ -644,6 +644,18 @@ article.cardProject {
 
 #selected-language {
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+}
+
+#selected-language:focus-visible {
+    outline: 2px solid #2c98f0;
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 .language-option-item {
@@ -654,8 +666,9 @@ article.cardProject {
     transition: background-color 0.2s;
 }
 
-.language-option-item:hover {
+.language-option-item:hover, .language-option-item:focus {
     background-color: #f0f0f0;
+    outline: none;
 }
 
 .language-option-item img {
@@ -679,7 +692,9 @@ article.cardProject {
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     padding: 5px;
-		min-width: 150px;
+    min-width: 150px;
+    list-style: none;
+    margin: 0;
 }
 
 @media screen and (max-width: 768px) {

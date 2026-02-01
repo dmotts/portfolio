@@ -17,20 +17,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const populateLanguageOptions = () => {
     languageOptions.innerHTML = ''; // Clear existing options
     for (const [lang, { name, flag }] of Object.entries(languages)) {
-      const option = document.createElement('div');
-      option.classList.add('language-option-item');
-      option.setAttribute('data-lang', lang);
+      const li = document.createElement('li');
+      li.setAttribute('role', 'none');
+
+      const button = document.createElement('button');
+      button.classList.add('language-option-item');
+      button.setAttribute('data-lang', lang);
+      button.setAttribute('role', 'option');
+      button.style.width = '100%';
+      button.style.background = 'none';
+      button.style.border = 'none';
+      button.style.textAlign = 'left';
 
       const img = document.createElement('img');
       img.src = `https://flagcdn.com/${flag}.svg`;
-      img.alt = name;
+      img.alt = ''; // Decorative, name is in span
 
       const span = document.createElement('span');
       span.textContent = name;
 
-      option.appendChild(img);
-      option.appendChild(span);
-      languageOptions.appendChild(option);
+      button.appendChild(img);
+      button.appendChild(span);
+      li.appendChild(button);
+      languageOptions.appendChild(li);
     }
   };
 
@@ -86,14 +95,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Hide options
       languageOptions.style.display = 'none';
+      selectedLanguage.setAttribute('aria-expanded', 'false');
     } catch (error) {
       console.error(error);
     }
   };
 
+  const toggleOptions = () => {
+    const isExpanded = selectedLanguage.getAttribute('aria-expanded') === 'true';
+    selectedLanguage.setAttribute('aria-expanded', !isExpanded);
+    languageOptions.style.display = isExpanded ? 'none' : 'block';
+  };
+
   selectedLanguage.addEventListener('click', (event) => {
     event.stopPropagation();
-    languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+    toggleOptions();
   });
 
   languageOptions.addEventListener('click', (event) => {
@@ -106,6 +122,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('click', () => {
     languageOptions.style.display = 'none';
+    selectedLanguage.setAttribute('aria-expanded', 'false');
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      languageOptions.style.display = 'none';
+      selectedLanguage.setAttribute('aria-expanded', 'false');
+      if (document.activeElement.closest('#language-switcher-container')) {
+        selectedLanguage.focus();
+      }
+    }
   });
 
   // Populate language options and set initial language
