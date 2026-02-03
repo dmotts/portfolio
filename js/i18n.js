@@ -17,9 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const populateLanguageOptions = () => {
     languageOptions.innerHTML = ''; // Clear existing options
     for (const [lang, { name, flag }] of Object.entries(languages)) {
-      const option = document.createElement('div');
+      const option = document.createElement('li');
       option.classList.add('language-option-item');
       option.setAttribute('data-lang', lang);
+      option.setAttribute('role', 'option');
+      option.setAttribute('tabindex', '0');
 
       const img = document.createElement('img');
       img.src = `https://flagcdn.com/${flag}.svg`;
@@ -86,26 +88,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Hide options
       languageOptions.style.display = 'none';
+      selectedLanguage.setAttribute('aria-expanded', 'false');
     } catch (error) {
       console.error(error);
     }
   };
 
+  const toggleMenu = (show) => {
+    const isVisible = show !== undefined ? !show : languageOptions.style.display === 'block';
+    languageOptions.style.display = isVisible ? 'none' : 'block';
+    selectedLanguage.setAttribute('aria-expanded', !isVisible);
+  };
+
   selectedLanguage.addEventListener('click', (event) => {
     event.stopPropagation();
-    languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+    toggleMenu();
   });
 
-  languageOptions.addEventListener('click', (event) => {
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && languageOptions.style.display === 'block') {
+      toggleMenu(false);
+      selectedLanguage.focus();
+    }
+  });
+
+  const handleLanguageSelection = (event) => {
     const target = event.target.closest('.language-option-item');
     if (target) {
       const lang = target.getAttribute('data-lang');
       setLanguage(lang);
     }
+  };
+
+  languageOptions.addEventListener('click', handleLanguageSelection);
+  languageOptions.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleLanguageSelection(event);
+    }
   });
 
   document.addEventListener('click', () => {
-    languageOptions.style.display = 'none';
+    if (languageOptions.style.display === 'block') {
+      toggleMenu(false);
+    }
   });
 
   // Populate language options and set initial language
