@@ -231,7 +231,7 @@ const startTypewriterAnimation = async () => {
 
     const lang = getStoredLanguage();
     const translations = await fetchTranslations(lang);
-    const originalText = translations['contact.placeholder'] || "Whether you’re looking to overcome a business challenge or bring your idea to life.\\n\\nMessage me today, and together we’ll find the perfect solution 🤝";
+    const originalText = translations['contact.placeholder'] || "Need help overcoming a challenge or bringing your idea to life? I’ll solve it with precision and creativity 💡\\n\\nMessage me today, and together we’ll find the perfect solution 🤝";
 
     const adjustedText = adjustPlaceholderText(originalText, textarea);
     typeWriter(adjustedText, textarea); // Start typing animation
