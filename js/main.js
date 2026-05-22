@@ -107,9 +107,11 @@
 			if ($('body').hasClass('offcanvas')) {
 				$this.removeClass('active');
 				$('body').removeClass('offcanvas');
+				$this.attr('aria-expanded', 'false');
 			} else {
 				$this.addClass('active');
 				$('body').addClass('offcanvas');
+				$this.attr('aria-expanded', 'true');
 			}
 			
 			// Remove transition class after animation completes
