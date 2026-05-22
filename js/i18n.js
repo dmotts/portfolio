@@ -17,20 +17,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const populateLanguageOptions = () => {
     languageOptions.innerHTML = ''; // Clear existing options
     for (const [lang, { name, flag }] of Object.entries(languages)) {
-      const option = document.createElement('div');
-      option.classList.add('language-option-item');
-      option.setAttribute('data-lang', lang);
+      const listItem = document.createElement('li');
+      listItem.setAttribute('role', 'menuitem');
+      listItem.setAttribute('data-lang', lang);
+      listItem.classList.add('language-option-item');
 
       const img = document.createElement('img');
       img.src = `https://flagcdn.com/${flag}.svg`;
       img.alt = name;
+      img.loading = 'lazy';
 
       const span = document.createElement('span');
       span.textContent = name;
 
-      option.appendChild(img);
-      option.appendChild(span);
-      languageOptions.appendChild(option);
+      listItem.appendChild(img);
+      listItem.appendChild(span);
+      languageOptions.appendChild(listItem);
     }
   };
 
@@ -81,34 +83,94 @@ document.addEventListener('DOMContentLoaded', () => {
       document.dispatchEvent(event);
 
       // Update selected language display
-      const selectedContent = selectedLanguage.querySelector('.language-option-item');
-      selectedContent.innerHTML = `<i class="icon-world" style="vertical-align: middle; margin-right: 0.25em;"></i> ${lang.toUpperCase()}`;
+      selectedLanguage.innerHTML = `<i class="icon-world" style="vertical-align: middle; margin-right: 0.25em;"></i> ${lang.toUpperCase()}`;
 
-      // Hide options
-      languageOptions.style.display = 'none';
+      // Hide options and update ARIA
+      languageOptions.classList.add('hidden');
+      selectedLanguage.setAttribute('aria-expanded', 'false');
     } catch (error) {
       console.error(error);
     }
   };
 
+  const toggleLanguageOptions = () => {
+    const isExpanded = selectedLanguage.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      languageOptions.classList.add('hidden');
+      selectedLanguage.setAttribute('aria-expanded', 'false');
+    } else {
+      languageOptions.classList.remove('hidden');
+      selectedLanguage.setAttribute('aria-expanded', 'true');
+      // Focus the first item
+      languageOptions.querySelector('[role="menuitem"]').focus();
+    }
+  };
+
   selectedLanguage.addEventListener('click', (event) => {
     event.stopPropagation();
-    languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+    toggleLanguageOptions();
   });
 
   languageOptions.addEventListener('click', (event) => {
-    const target = event.target.closest('.language-option-item');
+    const target = event.target.closest('[data-lang]');
     if (target) {
       const lang = target.getAttribute('data-lang');
       setLanguage(lang);
+      selectedLanguage.focus(); // Return focus to the button
     }
   });
 
   document.addEventListener('click', () => {
-    languageOptions.style.display = 'none';
+    if (selectedLanguage.getAttribute('aria-expanded') === 'true') {
+      toggleLanguageOptions();
+    }
   });
+
+  languageSwitcherContainer.addEventListener('keydown', (event) => {
+    const isExpanded = selectedLanguage.getAttribute('aria-expanded') === 'true';
+
+    if (event.key === 'Escape' && isExpanded) {
+      toggleLanguageOptions();
+      selectedLanguage.focus();
+    }
+
+    if (event.key === 'Enter' || event.key === ' ') {
+        if (document.activeElement === selectedLanguage) {
+            event.preventDefault();
+            toggleLanguageOptions();
+        } else if (document.activeElement.parentElement === languageOptions) {
+            event.preventDefault();
+            const lang = document.activeElement.getAttribute('data-lang');
+            setLanguage(lang);
+            selectedLanguage.focus();
+        }
+    }
+
+    if (isExpanded && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+      event.preventDefault();
+      const items = Array.from(languageOptions.querySelectorAll('[role="menuitem"]'));
+      const activeIndex = items.indexOf(document.activeElement);
+
+      let nextIndex = activeIndex;
+      if (event.key === 'ArrowDown') {
+        nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+      } else if (event.key === 'ArrowUp') {
+        nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+      }
+      items[nextIndex].focus();
+    }
+  });
+
+  // Make menu items focusable
+  const makeMenuItemsFocusable = () => {
+    languageOptions.querySelectorAll('[role="menuitem"]').forEach(item => {
+      item.setAttribute('tabindex', '-1');
+    });
+  };
+
 
   // Populate language options and set initial language
   populateLanguageOptions();
+  makeMenuItemsFocusable();
   setLanguage(getStoredLanguage());
 });
