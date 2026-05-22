@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Hide options
       languageOptions.style.display = 'none';
+      selectedLanguage.setAttribute('aria-expanded', 'false');
     } catch (error) {
       console.error(error);
     }
@@ -93,7 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   selectedLanguage.addEventListener('click', (event) => {
     event.stopPropagation();
-    languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+    const isExpanded = selectedLanguage.getAttribute('aria-expanded') === 'true';
+    selectedLanguage.setAttribute('aria-expanded', !isExpanded);
+    languageOptions.style.display = isExpanded ? 'none' : 'block';
   });
 
   languageOptions.addEventListener('click', (event) => {
@@ -106,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('click', () => {
     languageOptions.style.display = 'none';
+    selectedLanguage.setAttribute('aria-expanded', 'false');
   });
 
   // Populate language options and set initial language
