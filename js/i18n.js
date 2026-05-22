@@ -17,20 +17,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const populateLanguageOptions = () => {
     languageOptions.innerHTML = ''; // Clear existing options
     for (const [lang, { name, flag }] of Object.entries(languages)) {
-      const option = document.createElement('div');
-      option.classList.add('language-option-item');
-      option.setAttribute('data-lang', lang);
+      const listItem = document.createElement('li');
+      listItem.setAttribute('role', 'menuitem');
+
+      const button = document.createElement('button');
+      button.classList.add('language-option-item');
+      button.setAttribute('data-lang', lang);
 
       const img = document.createElement('img');
       img.src = `https://flagcdn.com/${flag}.svg`;
       img.alt = name;
+      img.loading = 'lazy';
 
       const span = document.createElement('span');
       span.textContent = name;
 
-      option.appendChild(img);
-      option.appendChild(span);
-      languageOptions.appendChild(option);
+      button.appendChild(img);
+      button.appendChild(span);
+      listItem.appendChild(button);
+      languageOptions.appendChild(listItem);
     }
   };
 
@@ -84,28 +89,47 @@ document.addEventListener('DOMContentLoaded', () => {
       const selectedContent = selectedLanguage.querySelector('.language-option-item');
       selectedContent.innerHTML = `<i class="icon-world" style="vertical-align: middle; margin-right: 0.25em;"></i> ${lang.toUpperCase()}`;
 
-      // Hide options
+      // Hide options and update ARIA
       languageOptions.style.display = 'none';
+      selectedLanguage.setAttribute('aria-expanded', 'false');
     } catch (error) {
       console.error(error);
     }
   };
 
+  const toggleDropdown = (show) => {
+    const isVisible = typeof show === 'boolean' ? show : languageOptions.style.display !== 'block';
+    languageOptions.style.display = isVisible ? 'block' : 'none';
+    selectedLanguage.setAttribute('aria-expanded', String(isVisible));
+  };
+
   selectedLanguage.addEventListener('click', (event) => {
     event.stopPropagation();
-    languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+    toggleDropdown();
   });
 
   languageOptions.addEventListener('click', (event) => {
-    const target = event.target.closest('.language-option-item');
+    const target = event.target.closest('button[data-lang]');
     if (target) {
       const lang = target.getAttribute('data-lang');
-      setLanguage(lang);
+      setLanguage(lang).then(() => {
+        selectedLanguage.focus(); // Return focus after language is set
+      });
     }
   });
 
   document.addEventListener('click', () => {
-    languageOptions.style.display = 'none';
+    if (selectedLanguage.getAttribute('aria-expanded') === 'true') {
+      toggleDropdown(false);
+    }
+  });
+
+  // Keyboard navigation
+  languageSwitcherContainer.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && selectedLanguage.getAttribute('aria-expanded') === 'true') {
+      toggleDropdown(false);
+      selectedLanguage.focus();
+    }
   });
 
   // Populate language options and set initial language
