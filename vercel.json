@@ -98,7 +98,7 @@
     },
     {
       "source": "/ai",
-      "destination": "https://aireadytips.substack.com",
+      "destination": "https://aireadytips.substack.com/about",
       "permanent": true
     },
     {
